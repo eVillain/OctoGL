@@ -1,14 +1,32 @@
-//
-//  RenderBackend.hpp
-//  OctoGL
-//
-//  Created by eVillain on 17/02/16.
-//  Copyright © 2016 The Drudgerist. All rights reserved.
-//
-
 #ifndef RenderBackend_hpp
 #define RenderBackend_hpp
 
-#include <stdio.h>
+#include <cstdint>
+
+typedef uint8_t VertexBufferID;
+
+struct VertexBuffer;
+
+enum BufferAccess {
+    STATIC,
+    DEFAULT,
+    DYNAMIC,
+};
+
+class RendererBackend
+{
+public:
+    RendererBackend();
+    virtual ~RendererBackend();
+    
+    virtual VertexBufferID addVertexBuffer(const long size,
+                                           const BufferAccess bufferAccess,
+                                           const void* data = NULL) = 0;
+    virtual void setVertexBuffer(const VertexBufferID vb) = 0;
+    virtual void uploadVertexData(const long size,
+                                  const BufferAccess bufferAccess,
+                                  const void* data) = 0;
+
+};
 
 #endif /* RenderBackend_hpp */

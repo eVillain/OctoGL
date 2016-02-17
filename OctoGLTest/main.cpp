@@ -1,12 +1,15 @@
 #include "AppContext.h"
+#include "GLBackend.hpp"
+
 #include "DefaultShaders.h"
 #include <SDL2/SDL.h>
 #include <GL/glew.h>
 #include <string>
 
-GLuint vbo = 0;
+VertexBufferID vbID = 0;
 GLuint vao = 0;
 GLuint shader_program = 0;
+GLBackend backend;
 
 bool InitVertexBufferObject()
 {
@@ -16,19 +19,21 @@ bool InitVertexBufferObject()
         -0.5f, -0.5f,  0.0f
     };
     
-    glGenBuffers (1, &vbo);
-    glBindBuffer (GL_ARRAY_BUFFER, vbo);
-    glBufferData (GL_ARRAY_BUFFER, 9 * sizeof (float), points, GL_STATIC_DRAW);
-    
+    // Setup VertexBuffer
+    vbID = backend.addVertexBuffer(9*sizeof(float),
+                                   STATIC,
+                                   points);
     return true;
 }
 
 bool InitVertexArrayObject()
 {
+    // Setup VertexArray, this will move to backend next
     glGenVertexArrays (1, &vao);
     glBindVertexArray (vao);
     glEnableVertexAttribArray (0);
-    glBindBuffer (GL_ARRAY_BUFFER, vbo);
+    
+    backend.setVertexBuffer(vbID);
     glVertexAttribPointer (0, 3, GL_FLOAT, GL_FALSE, 0, NULL);
     
     return true;

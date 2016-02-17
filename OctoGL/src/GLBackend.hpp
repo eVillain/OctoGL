@@ -1,14 +1,25 @@
-//
-//  GLBackend.hpp
-//  OctoGL
-//
-//  Created by eVillain on 17/02/16.
-//  Copyright © 2016 The Drudgerist. All rights reserved.
-//
-
 #ifndef GLBackend_hpp
 #define GLBackend_hpp
 
-#include <stdio.h>
+#include "RenderBackend.hpp"
+#include <vector>
 
+class GLBackend
+{
+public:
+    GLBackend();
+    virtual ~GLBackend();
+    
+    virtual VertexBufferID addVertexBuffer(const long size,
+                                           const BufferAccess bufferAccess,
+                                           const void* data = NULL);
+    virtual void setVertexBuffer(const VertexBufferID vb);
+    virtual void uploadVertexData(const long size,
+                                  const BufferAccess bufferAccess,
+                                  const void* data);
+    
+private:
+    std::vector<VertexBuffer> vertexBuffers;
+
+};
 #endif /* GLBackend_hpp */

@@ -9,6 +9,15 @@
 /* Begin PBXBuildFile section */
 		D958F7531C74E75C00347EC0 /* AppContext.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D958F74F1C74E75C00347EC0 /* AppContext.cpp */; settings = {ASSET_TAGS = (); }; };
 		D958F7541C74E75C00347EC0 /* Window.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D958F7511C74E75C00347EC0 /* Window.cpp */; settings = {ASSET_TAGS = (); }; };
+		D958F7591C74EAA900347EC0 /* DefaultShaders.h in Headers */ = {isa = PBXBuildFile; fileRef = D958F7571C74EAA900347EC0 /* DefaultShaders.h */; settings = {ASSET_TAGS = (); }; };
+		D958F75C1C750FF900347EC0 /* RenderBackend.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D958F75A1C750FF900347EC0 /* RenderBackend.cpp */; settings = {ASSET_TAGS = (); }; };
+		D958F75D1C750FF900347EC0 /* RenderBackend.hpp in Headers */ = {isa = PBXBuildFile; fileRef = D958F75B1C750FF900347EC0 /* RenderBackend.hpp */; settings = {ASSET_TAGS = (); }; };
+		D958F7601C75115500347EC0 /* NullBackend.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D958F75E1C75115500347EC0 /* NullBackend.cpp */; settings = {ASSET_TAGS = (); }; };
+		D958F7611C75115500347EC0 /* NullBackend.hpp in Headers */ = {isa = PBXBuildFile; fileRef = D958F75F1C75115500347EC0 /* NullBackend.hpp */; settings = {ASSET_TAGS = (); }; };
+		D958F7641C75116700347EC0 /* GLBackend.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D958F7621C75116700347EC0 /* GLBackend.cpp */; settings = {ASSET_TAGS = (); }; };
+		D958F7651C75116700347EC0 /* GLBackend.hpp in Headers */ = {isa = PBXBuildFile; fileRef = D958F7631C75116700347EC0 /* GLBackend.hpp */; settings = {ASSET_TAGS = (); }; };
+		D958F7661C75159100347EC0 /* libOctoGL.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D9D541281C74807600A8D1F8 /* libOctoGL.a */; };
+		D958F7671C7515B300347EC0 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9D542A41C74837300A8D1F8 /* OpenGL.framework */; };
 		D9D541451C7480F400A8D1F8 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9D541441C7480F400A8D1F8 /* main.cpp */; settings = {ASSET_TAGS = (); }; };
 		D9D542A21C74836500A8D1F8 /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9D5429F1C74813F00A8D1F8 /* SDL2.framework */; };
 		D9D542A31C74836900A8D1F8 /* libGLEW.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D9D5429E1C74813F00A8D1F8 /* libGLEW.a */; };
@@ -16,11 +25,17 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		D958F74E1C7493B000347EC0 /* DefaultShaders.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DefaultShaders.h; sourceTree = "<group>"; };
 		D958F74F1C74E75C00347EC0 /* AppContext.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AppContext.cpp; sourceTree = "<group>"; };
 		D958F7501C74E75C00347EC0 /* AppContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppContext.h; sourceTree = "<group>"; };
 		D958F7511C74E75C00347EC0 /* Window.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Window.cpp; sourceTree = "<group>"; };
 		D958F7521C74E75C00347EC0 /* Window.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Window.h; sourceTree = "<group>"; };
+		D958F7571C74EAA900347EC0 /* DefaultShaders.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DefaultShaders.h; sourceTree = "<group>"; };
+		D958F75A1C750FF900347EC0 /* RenderBackend.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RenderBackend.cpp; sourceTree = "<group>"; };
+		D958F75B1C750FF900347EC0 /* RenderBackend.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = RenderBackend.hpp; sourceTree = "<group>"; };
+		D958F75E1C75115500347EC0 /* NullBackend.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = NullBackend.cpp; sourceTree = "<group>"; };
+		D958F75F1C75115500347EC0 /* NullBackend.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = NullBackend.hpp; sourceTree = "<group>"; };
+		D958F7621C75116700347EC0 /* GLBackend.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GLBackend.cpp; sourceTree = "<group>"; };
+		D958F7631C75116700347EC0 /* GLBackend.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = GLBackend.hpp; sourceTree = "<group>"; };
 		D9D541281C74807600A8D1F8 /* libOctoGL.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libOctoGL.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9D541331C7480B300A8D1F8 /* OctoGLTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OctoGLTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9D541401C7480B300A8D1F8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -373,6 +388,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D958F7671C7515B300347EC0 /* OpenGL.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -380,6 +396,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D958F7661C75159100347EC0 /* libOctoGL.a in Frameworks */,
 				D9D542A51C74837300A8D1F8 /* OpenGL.framework in Frameworks */,
 				D9D542A21C74836500A8D1F8 /* SDL2.framework in Frameworks */,
 				D9D542A31C74836900A8D1F8 /* libGLEW.a in Frameworks */,
@@ -389,12 +406,43 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D958F7551C74EAA800347EC0 /* OctoGL */ = {
+			isa = PBXGroup;
+			children = (
+				D958F7561C74EAA900347EC0 /* include */,
+				D958F7581C74EAA900347EC0 /* src */,
+			);
+			path = OctoGL;
+			sourceTree = "<group>";
+		};
+		D958F7561C74EAA900347EC0 /* include */ = {
+			isa = PBXGroup;
+			children = (
+				D958F7571C74EAA900347EC0 /* DefaultShaders.h */,
+			);
+			path = include;
+			sourceTree = "<group>";
+		};
+		D958F7581C74EAA900347EC0 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				D958F75A1C750FF900347EC0 /* RenderBackend.cpp */,
+				D958F75B1C750FF900347EC0 /* RenderBackend.hpp */,
+				D958F75E1C75115500347EC0 /* NullBackend.cpp */,
+				D958F75F1C75115500347EC0 /* NullBackend.hpp */,
+				D958F7621C75116700347EC0 /* GLBackend.cpp */,
+				D958F7631C75116700347EC0 /* GLBackend.hpp */,
+			);
+			path = src;
+			sourceTree = "<group>";
+		};
 		D9D5411F1C74807600A8D1F8 = {
 			isa = PBXGroup;
 			children = (
 				D9D542A41C74837300A8D1F8 /* OpenGL.framework */,
 				D9D541461C74813E00A8D1F8 /* include */,
 				D9D5429D1C74813F00A8D1F8 /* libs */,
+				D958F7551C74EAA800347EC0 /* OctoGL */,
 				D9D541341C7480B300A8D1F8 /* OctoGLTest */,
 				D9D541291C74807600A8D1F8 /* Products */,
 			);
@@ -416,7 +464,6 @@
 				D958F7501C74E75C00347EC0 /* AppContext.h */,
 				D958F7511C74E75C00347EC0 /* Window.cpp */,
 				D958F7521C74E75C00347EC0 /* Window.h */,
-				D958F74E1C7493B000347EC0 /* DefaultShaders.h */,
 				D9D541441C7480F400A8D1F8 /* main.cpp */,
 				D9D541401C7480B300A8D1F8 /* Info.plist */,
 			);
@@ -832,6 +879,10 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D958F7611C75115500347EC0 /* NullBackend.hpp in Headers */,
+				D958F7591C74EAA900347EC0 /* DefaultShaders.h in Headers */,
+				D958F7651C75116700347EC0 /* GLBackend.hpp in Headers */,
+				D958F75D1C750FF900347EC0 /* RenderBackend.hpp in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -923,6 +974,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D958F7641C75116700347EC0 /* GLBackend.cpp in Sources */,
+				D958F75C1C750FF900347EC0 /* RenderBackend.cpp in Sources */,
+				D958F7601C75115500347EC0 /* NullBackend.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1020,6 +1074,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				EXECUTABLE_PREFIX = lib;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/libs",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/libs",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -1028,6 +1090,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				EXECUTABLE_PREFIX = lib;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/libs",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/libs",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

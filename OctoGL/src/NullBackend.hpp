@@ -1,14 +1,22 @@
-//
-//  NullBackend.hpp
-//  OctoGL
-//
-//  Created by eVillain on 17/02/16.
-//  Copyright © 2016 The Drudgerist. All rights reserved.
-//
-
 #ifndef NullBackend_hpp
 #define NullBackend_hpp
 
-#include <stdio.h>
+#include "RenderBackend.hpp"
+
+class NullBackend
+{
+public:
+    NullBackend();
+    virtual ~NullBackend();
+    
+    virtual VertexBufferID addVertexBuffer(const long size,
+                                           const BufferAccess bufferAccess,
+                                           const void* data = NULL);
+    virtual void setVertexBuffer(const VertexBufferID vb);
+    virtual void uploadVertexData(const long size,
+                                  const BufferAccess bufferAccess,
+                                  const void* data);
+
+};
 
 #endif /* NullBackend_hpp */
