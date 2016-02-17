@@ -14,6 +14,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D958F74E1C7493B000347EC0 /* DefaultShaders.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DefaultShaders.h; sourceTree = "<group>"; };
 		D9D541281C74807600A8D1F8 /* libOctoGL.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libOctoGL.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9D541331C7480B300A8D1F8 /* OctoGLTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OctoGLTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9D541401C7480B300A8D1F8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -407,6 +408,7 @@
 			children = (
 				D9D541441C7480F400A8D1F8 /* main.cpp */,
 				D9D541401C7480B300A8D1F8 /* Info.plist */,
+				D958F74E1C7493B000347EC0 /* DefaultShaders.h */,
 			);
 			path = OctoGLTest;
 			sourceTree = "<group>";
@@ -1069,6 +1071,7 @@
 				D9D5412E1C74807600A8D1F8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		D9D541411C7480B300A8D1F8 /* Build configuration list for PBXNativeTarget "OctoGLTest" */ = {
 			isa = XCConfigurationList;
@@ -1077,6 +1080,7 @@
 				D9D541431C7480B300A8D1F8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
