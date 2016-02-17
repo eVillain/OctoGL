@@ -82,12 +82,32 @@ bool InitGLEW()
     return true;
 }
 
+bool quit = false;
+
 int main(int argc, const char * argv[])
 {
 
     if (!InitSDL()) return 1;
     if (!OpenWindow("OctoGL v0.0.0", 640, 480, false)) return 1;
     if (!InitGLEW()) return 1;
+    
+    SDL_Event event;
+    
+    while (!quit) {
+        
+        if (SDL_WaitEvent(&event) >= 0) {
+            switch (event.type) {
+                case SDL_QUIT: {
+                    printf("Quit requested, so I'm quitting.\n");
+                    quit = true;
+                }
+                    break;
+            }
+        }
+    }
+    
+    // Don't forget to terminate this :)
+    SDL_Quit();
     
     return 0;
 }
