@@ -11,6 +11,7 @@
 		D94346BD1C75440200C8ACF2 /* IndexedMap.h in Headers */ = {isa = PBXBuildFile; fileRef = D94346B91C75440200C8ACF2 /* IndexedMap.h */; settings = {ASSET_TAGS = (); }; };
 		D94346BE1C75440200C8ACF2 /* NullBackend.h in Headers */ = {isa = PBXBuildFile; fileRef = D94346BA1C75440200C8ACF2 /* NullBackend.h */; settings = {ASSET_TAGS = (); }; };
 		D94346BF1C75440200C8ACF2 /* RenderBackend.h in Headers */ = {isa = PBXBuildFile; fileRef = D94346BB1C75440200C8ACF2 /* RenderBackend.h */; settings = {ASSET_TAGS = (); }; };
+		D94346C01C76196D00C8ACF2 /* libGLEW.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D9D5429E1C74813F00A8D1F8 /* libGLEW.a */; };
 		D958F7531C74E75C00347EC0 /* AppContext.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D958F74F1C74E75C00347EC0 /* AppContext.cpp */; settings = {ASSET_TAGS = (); }; };
 		D958F7541C74E75C00347EC0 /* Window.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D958F7511C74E75C00347EC0 /* Window.cpp */; settings = {ASSET_TAGS = (); }; };
 		D958F7591C74EAA900347EC0 /* DefaultShaders.h in Headers */ = {isa = PBXBuildFile; fileRef = D958F7571C74EAA900347EC0 /* DefaultShaders.h */; settings = {ASSET_TAGS = (); }; };
@@ -391,6 +392,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D958F7671C7515B300347EC0 /* OpenGL.framework in Frameworks */,
+				D94346C01C76196D00C8ACF2 /* libGLEW.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1082,6 +1084,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/libs",
 				);
+				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/include";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/libs",
@@ -1098,6 +1101,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/libs",
 				);
+				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/include";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/libs",

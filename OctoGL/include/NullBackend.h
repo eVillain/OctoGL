@@ -16,7 +16,11 @@ public:
     virtual void uploadVertexData(const long size,
                                   const BufferAccess bufferAccess,
                                   const void* data);
-
+    
+    virtual VertexLayoutID addVertexLayout(const long numStreams,
+                                           const VertexFormatDesc* formats,
+                                           const VertexBufferID* vbIDs);
+    virtual void setVertexLayout(const VertexLayoutID vl);
 };
 
 #endif /* NULL_BACKEND_H */

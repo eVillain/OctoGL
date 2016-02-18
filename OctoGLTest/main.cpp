@@ -7,7 +7,8 @@
 #include <string>
 
 VertexBufferID vbID = 0;
-GLuint vao = 0;
+VertexLayoutID vlID = 0;
+//GLuint vao = 0;
 GLuint shader_program = 0;
 GLBackend backend;
 
@@ -28,14 +29,13 @@ bool InitVertexBufferObject()
 
 bool InitVertexArrayObject()
 {
-    // Setup VertexArray, this will move to backend next
-    glGenVertexArrays (1, &vao);
-    glBindVertexArray (vao);
-    glEnableVertexAttribArray (0);
+    // Setup VertexArray
+    VertexFormatDesc desc = {
+        0, FLOAT, 3
+    };
     
-    backend.setVertexBuffer(vbID);
-    glVertexAttribPointer (0, 3, GL_FLOAT, GL_FALSE, 0, NULL);
-    
+    vlID = backend.addVertexLayout(1, &desc, &vbID);
+
     return true;
 }
 
@@ -77,7 +77,7 @@ int main(int argc, const char * argv[])
         glClear (GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         // Set our OpenGL state
         glUseProgram (shader_program);
-        glBindVertexArray (vao);
+        backend.setVertexLayout(vlID);
         // Draw points 0-3 from the currently bound VAO with current in-use shader
         glDrawArrays (GL_TRIANGLES, 0, 3);
         
