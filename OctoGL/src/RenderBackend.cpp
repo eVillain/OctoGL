@@ -1,4 +1,4 @@
-#include "RenderBackend.hpp"
+#include "RenderBackend.h"
 
 RendererBackend::RendererBackend()
 {

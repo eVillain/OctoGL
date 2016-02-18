@@ -7,15 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D94346BC1C75440200C8ACF2 /* GLBackend.h in Headers */ = {isa = PBXBuildFile; fileRef = D94346B81C75440200C8ACF2 /* GLBackend.h */; settings = {ASSET_TAGS = (); }; };
+		D94346BD1C75440200C8ACF2 /* IndexedMap.h in Headers */ = {isa = PBXBuildFile; fileRef = D94346B91C75440200C8ACF2 /* IndexedMap.h */; settings = {ASSET_TAGS = (); }; };
+		D94346BE1C75440200C8ACF2 /* NullBackend.h in Headers */ = {isa = PBXBuildFile; fileRef = D94346BA1C75440200C8ACF2 /* NullBackend.h */; settings = {ASSET_TAGS = (); }; };
+		D94346BF1C75440200C8ACF2 /* RenderBackend.h in Headers */ = {isa = PBXBuildFile; fileRef = D94346BB1C75440200C8ACF2 /* RenderBackend.h */; settings = {ASSET_TAGS = (); }; };
 		D958F7531C74E75C00347EC0 /* AppContext.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D958F74F1C74E75C00347EC0 /* AppContext.cpp */; settings = {ASSET_TAGS = (); }; };
 		D958F7541C74E75C00347EC0 /* Window.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D958F7511C74E75C00347EC0 /* Window.cpp */; settings = {ASSET_TAGS = (); }; };
 		D958F7591C74EAA900347EC0 /* DefaultShaders.h in Headers */ = {isa = PBXBuildFile; fileRef = D958F7571C74EAA900347EC0 /* DefaultShaders.h */; settings = {ASSET_TAGS = (); }; };
 		D958F75C1C750FF900347EC0 /* RenderBackend.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D958F75A1C750FF900347EC0 /* RenderBackend.cpp */; settings = {ASSET_TAGS = (); }; };
-		D958F75D1C750FF900347EC0 /* RenderBackend.hpp in Headers */ = {isa = PBXBuildFile; fileRef = D958F75B1C750FF900347EC0 /* RenderBackend.hpp */; settings = {ASSET_TAGS = (); }; };
 		D958F7601C75115500347EC0 /* NullBackend.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D958F75E1C75115500347EC0 /* NullBackend.cpp */; settings = {ASSET_TAGS = (); }; };
-		D958F7611C75115500347EC0 /* NullBackend.hpp in Headers */ = {isa = PBXBuildFile; fileRef = D958F75F1C75115500347EC0 /* NullBackend.hpp */; settings = {ASSET_TAGS = (); }; };
 		D958F7641C75116700347EC0 /* GLBackend.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D958F7621C75116700347EC0 /* GLBackend.cpp */; settings = {ASSET_TAGS = (); }; };
-		D958F7651C75116700347EC0 /* GLBackend.hpp in Headers */ = {isa = PBXBuildFile; fileRef = D958F7631C75116700347EC0 /* GLBackend.hpp */; settings = {ASSET_TAGS = (); }; };
 		D958F7661C75159100347EC0 /* libOctoGL.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D9D541281C74807600A8D1F8 /* libOctoGL.a */; };
 		D958F7671C7515B300347EC0 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9D542A41C74837300A8D1F8 /* OpenGL.framework */; };
 		D9D541451C7480F400A8D1F8 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9D541441C7480F400A8D1F8 /* main.cpp */; settings = {ASSET_TAGS = (); }; };
@@ -25,17 +26,18 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D94346B81C75440200C8ACF2 /* GLBackend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLBackend.h; sourceTree = "<group>"; };
+		D94346B91C75440200C8ACF2 /* IndexedMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IndexedMap.h; sourceTree = "<group>"; };
+		D94346BA1C75440200C8ACF2 /* NullBackend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NullBackend.h; sourceTree = "<group>"; };
+		D94346BB1C75440200C8ACF2 /* RenderBackend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RenderBackend.h; sourceTree = "<group>"; };
 		D958F74F1C74E75C00347EC0 /* AppContext.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AppContext.cpp; sourceTree = "<group>"; };
 		D958F7501C74E75C00347EC0 /* AppContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppContext.h; sourceTree = "<group>"; };
 		D958F7511C74E75C00347EC0 /* Window.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Window.cpp; sourceTree = "<group>"; };
 		D958F7521C74E75C00347EC0 /* Window.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Window.h; sourceTree = "<group>"; };
 		D958F7571C74EAA900347EC0 /* DefaultShaders.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DefaultShaders.h; sourceTree = "<group>"; };
 		D958F75A1C750FF900347EC0 /* RenderBackend.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RenderBackend.cpp; sourceTree = "<group>"; };
-		D958F75B1C750FF900347EC0 /* RenderBackend.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = RenderBackend.hpp; sourceTree = "<group>"; };
 		D958F75E1C75115500347EC0 /* NullBackend.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = NullBackend.cpp; sourceTree = "<group>"; };
-		D958F75F1C75115500347EC0 /* NullBackend.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = NullBackend.hpp; sourceTree = "<group>"; };
 		D958F7621C75116700347EC0 /* GLBackend.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GLBackend.cpp; sourceTree = "<group>"; };
-		D958F7631C75116700347EC0 /* GLBackend.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = GLBackend.hpp; sourceTree = "<group>"; };
 		D9D541281C74807600A8D1F8 /* libOctoGL.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libOctoGL.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9D541331C7480B300A8D1F8 /* OctoGLTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OctoGLTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9D541401C7480B300A8D1F8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -419,6 +421,10 @@
 			isa = PBXGroup;
 			children = (
 				D958F7571C74EAA900347EC0 /* DefaultShaders.h */,
+				D94346B81C75440200C8ACF2 /* GLBackend.h */,
+				D94346B91C75440200C8ACF2 /* IndexedMap.h */,
+				D94346BA1C75440200C8ACF2 /* NullBackend.h */,
+				D94346BB1C75440200C8ACF2 /* RenderBackend.h */,
 			);
 			path = include;
 			sourceTree = "<group>";
@@ -426,12 +432,9 @@
 		D958F7581C74EAA900347EC0 /* src */ = {
 			isa = PBXGroup;
 			children = (
-				D958F75A1C750FF900347EC0 /* RenderBackend.cpp */,
-				D958F75B1C750FF900347EC0 /* RenderBackend.hpp */,
-				D958F75E1C75115500347EC0 /* NullBackend.cpp */,
-				D958F75F1C75115500347EC0 /* NullBackend.hpp */,
 				D958F7621C75116700347EC0 /* GLBackend.cpp */,
-				D958F7631C75116700347EC0 /* GLBackend.hpp */,
+				D958F75E1C75115500347EC0 /* NullBackend.cpp */,
+				D958F75A1C750FF900347EC0 /* RenderBackend.cpp */,
 			);
 			path = src;
 			sourceTree = "<group>";
@@ -879,10 +882,11 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D958F7611C75115500347EC0 /* NullBackend.hpp in Headers */,
+				D94346BC1C75440200C8ACF2 /* GLBackend.h in Headers */,
 				D958F7591C74EAA900347EC0 /* DefaultShaders.h in Headers */,
-				D958F7651C75116700347EC0 /* GLBackend.hpp in Headers */,
-				D958F75D1C750FF900347EC0 /* RenderBackend.hpp in Headers */,
+				D94346BE1C75440200C8ACF2 /* NullBackend.h in Headers */,
+				D94346BD1C75440200C8ACF2 /* IndexedMap.h in Headers */,
+				D94346BF1C75440200C8ACF2 /* RenderBackend.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

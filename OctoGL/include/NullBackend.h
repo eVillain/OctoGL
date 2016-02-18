@@ -1,14 +1,13 @@
-#ifndef GLBackend_hpp
-#define GLBackend_hpp
+#ifndef NULL_BACKEND_H
+#define NULL_BACKEND_H
 
-#include "RenderBackend.hpp"
-#include <vector>
+#include "RenderBackend.h"
 
-class GLBackend
+class NullBackend
 {
 public:
-    GLBackend();
-    virtual ~GLBackend();
+    NullBackend();
+    virtual ~NullBackend();
     
     virtual VertexBufferID addVertexBuffer(const long size,
                                            const BufferAccess bufferAccess,
@@ -17,9 +16,7 @@ public:
     virtual void uploadVertexData(const long size,
                                   const BufferAccess bufferAccess,
                                   const void* data);
-    
-private:
-    std::vector<VertexBuffer> vertexBuffers;
 
 };
-#endif /* GLBackend_hpp */
+
+#endif /* NULL_BACKEND_H */

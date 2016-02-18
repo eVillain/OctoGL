@@ -1,5 +1,5 @@
 #include "AppContext.h"
-#include "GLBackend.hpp"
+#include "GLBackend.h"
 
 #include "DefaultShaders.h"
 #include <SDL2/SDL.h>

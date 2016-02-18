@@ -1,4 +1,6 @@
-#include "GLBackend.hpp"
+#include "GLBackend.h"
+// This is only for AppleGL, in the real world we need to wrap this with some
+// preprocessor directives to support other platforms
 #include <AGL/AGL.h>
 
 struct VertexBuffer {
@@ -19,10 +21,9 @@ GLBackend::GLBackend()
 
 GLBackend::~GLBackend()
 {
-    for (auto vb : vertexBuffers) {
-        glDeleteBuffers(1, &vb.vboHandle);
+    for (auto vb : vertexBuffers.getMap()) {
+        glDeleteBuffers(1, &vb.second.vboHandle);
     }
-    vertexBuffers.clear();
 }
 
 VertexBufferID GLBackend::addVertexBuffer(const long size,
@@ -33,23 +34,29 @@ VertexBufferID GLBackend::addVertexBuffer(const long size,
     vb.size = (GLsizei)size;
 
     glGenBuffers(1, &vb.vboHandle);
-    glBindBuffer(GL_ARRAY_BUFFER, vb.vboHandle);
-    glBufferData(GL_ARRAY_BUFFER, size, data, VBAccess[bufferAccess]);
+    glBindBuffer(GL_ARRAY_BUFFER,
+                 vb.vboHandle);
+    glBufferData(GL_ARRAY_BUFFER,
+                 size,
+                 data,
+                 VBAccess[bufferAccess]);
 
-    vertexBuffers.push_back(vb);
-    
-    // This is obviously not a proper way to index things :)
-    return vertexBuffers.size()-1;
+    VertexBufferID newID = vertexBuffers.add(vb);
+    return newID;
 }
 
 void GLBackend::setVertexBuffer(const VertexBufferID vb)
 {
-    glBindBuffer (GL_ARRAY_BUFFER, vertexBuffers[vb].vboHandle);
+    glBindBuffer(GL_ARRAY_BUFFER,
+                 vertexBuffers.getMap().at(vb).vboHandle);
 }
 
 void GLBackend::uploadVertexData(const long size,
                                  const BufferAccess bufferAccess,
                                  const void* data)
 {
-    glBufferData(GL_ARRAY_BUFFER, size, data, VBAccess[bufferAccess]);
+    glBufferData(GL_ARRAY_BUFFER,
+                 size,
+                 data,
+                 VBAccess[bufferAccess]);
 }

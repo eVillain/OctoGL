@@ -1,5 +1,5 @@
-#ifndef RenderBackend_hpp
-#define RenderBackend_hpp
+#ifndef RENDER_BACKEND_H
+#define RENDER_BACKEND_H
 
 #include <cstdint>
 
@@ -29,4 +29,4 @@ public:
 
 };
 
-#endif /* RenderBackend_hpp */
+#endif /* RENDER_BACKEND_H */

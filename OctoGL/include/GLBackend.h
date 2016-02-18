@@ -1,13 +1,14 @@
-#ifndef NullBackend_hpp
-#define NullBackend_hpp
+#ifndef GL_BACKEND_H
+#define GL_BACKEND_H
 
-#include "RenderBackend.hpp"
+#include "RenderBackend.h"
+#include "IndexedMap.h"
 
-class NullBackend
+class GLBackend
 {
 public:
-    NullBackend();
-    virtual ~NullBackend();
+    GLBackend();
+    virtual ~GLBackend();
     
     virtual VertexBufferID addVertexBuffer(const long size,
                                            const BufferAccess bufferAccess,
@@ -16,7 +17,9 @@ public:
     virtual void uploadVertexData(const long size,
                                   const BufferAccess bufferAccess,
                                   const void* data);
+    
+private:
+    IndexedMap<VertexBufferID, VertexBuffer> vertexBuffers;
 
 };
-
-#endif /* NullBackend_hpp */
+#endif /* GLBackend_hpp */
