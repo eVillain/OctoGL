@@ -1,10 +1,10 @@
 #ifndef GL_BACKEND_H
 #define GL_BACKEND_H
 
-#include "RenderBackend.h"
+#include "RendererBackend.h"
 #include "IndexedMap.h"
 
-class GLBackend
+class GLBackend : public RendererBackend
 {
 public:
     GLBackend();
@@ -25,9 +25,28 @@ public:
                                            const VertexBufferID* vbIDs);
     virtual void setVertexLayout(const VertexLayoutID vl);
 
-private:
-    IndexedMap<VertexBufferID, VertexBuffer> vertexBuffers;
-    IndexedMap<VertexLayoutID, VertexLayout> vertexLayouts;
+    // -- Shaders -- //
+    virtual ShaderID addShader(const char* fragSource,
+                               const char* vertSource,
+                               const char* geomSource = NULL);
+    virtual void setShader(const ShaderID shaderID);
 
+    
+    // -- Render functionality -- //
+    virtual void clear(const bool clearColor,
+                       const bool clearDepth,
+                       const bool clearStencil,
+                       const float *color,
+                       const float depth,
+                       const uint8_t stencil);
+    
+    virtual void drawArrays(const DrawPrimitives primitives,
+                            const int firstVertex,
+                            const int nVertices);
+    
+private:
+    IndexedMap<VertexBufferID, VertexBuffer> _vertexBuffers;
+    IndexedMap<VertexLayoutID, VertexLayout> _vertexLayouts;
+    IndexedMap<ShaderID, Shader> _shaders;
 };
 #endif /* GLBackend_hpp */

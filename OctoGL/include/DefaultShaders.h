@@ -1,5 +1,5 @@
-#ifndef DefaultShaders_h
-#define DefaultShaders_h
+#ifndef DEFAULT_SHADERS_H
+#define DEFAULT_SHADERS_H
 
 const char* vertex_shader =
 "#version 400\n"
@@ -15,4 +15,4 @@ const char* fragment_shader =
 "  frag_colour = vec4 (0.5, 0.0, 0.5, 1.0);"
 "}";
 
-#endif /* DefaultShaders_h */
+#endif /* DEFAULT_SHADERS_H */

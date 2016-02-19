@@ -30,3 +30,13 @@ VertexLayoutID NullBackend::addVertexLayout(const long numStreams,
 
 void NullBackend::setVertexLayout(const VertexLayoutID vl)
 { }
+
+ShaderID NullBackend::addShader(const char* fragSource,
+                                const char* vertSource,
+                                const char* geomSource)
+{
+    return 0;
+}
+
+void NullBackend::setShader(const ShaderID shaderID)
+{ }

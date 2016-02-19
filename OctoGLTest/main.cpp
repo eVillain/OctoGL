@@ -3,13 +3,11 @@
 
 #include "DefaultShaders.h"
 #include <SDL2/SDL.h>
-#include <GL/glew.h>
 #include <string>
 
 VertexBufferID vbID = 0;
 VertexLayoutID vlID = 0;
-//GLuint vao = 0;
-GLuint shader_program = 0;
+ShaderID shaderID = 0;
 GLBackend backend;
 
 bool InitVertexBufferObject()
@@ -20,7 +18,6 @@ bool InitVertexBufferObject()
         -0.5f, -0.5f,  0.0f
     };
     
-    // Setup VertexBuffer
     vbID = backend.addVertexBuffer(9*sizeof(float),
                                    STATIC,
                                    points);
@@ -29,31 +26,17 @@ bool InitVertexBufferObject()
 
 bool InitVertexArrayObject()
 {
-    // Setup VertexArray
     VertexFormatDesc desc = {
         0, FLOAT, 3
     };
     
     vlID = backend.addVertexLayout(1, &desc, &vbID);
-
     return true;
 }
 
 bool InitShader()
 {
-    GLuint vs = glCreateShader (GL_VERTEX_SHADER);
-    glShaderSource (vs, 1, &vertex_shader, NULL);
-    glCompileShader (vs);
-    
-    GLuint fs = glCreateShader (GL_FRAGMENT_SHADER);
-    glShaderSource (fs, 1, &fragment_shader, NULL);
-    glCompileShader (fs);
-    
-    shader_program = glCreateProgram ();
-    glAttachShader (shader_program, fs);
-    glAttachShader (shader_program, vs);
-    glLinkProgram (shader_program);
-    
+    shaderID = backend.addShader(fragment_shader, vertex_shader);
     return true;
 }
 
@@ -74,12 +57,13 @@ int main(int argc, const char * argv[])
     // Main application loop
     while (!quit) {
         // First wipe the drawing surface clear
-        glClear (GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-        // Set our OpenGL state
-        glUseProgram (shader_program);
+        float clearColor[4] = { 0.3, 0.3, 0.3, 0.0 };
+        backend.clear(true, true, false, clearColor, 0.0, 0);
+        // Set our render state
+        backend.setShader(shaderID);
         backend.setVertexLayout(vlID);
-        // Draw points 0-3 from the currently bound VAO with current in-use shader
-        glDrawArrays (GL_TRIANGLES, 0, 3);
+        // Draw points 0-3 from the currently bound vertices with current shader
+        backend.drawArrays(DRAW_TRIANGLES, 0, 3);
         
         // Update events like input handling
         if (SDL_WaitEvent(&event) >= 0) {

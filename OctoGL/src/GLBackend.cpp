@@ -14,13 +14,20 @@ struct VertexLayout {
     GLuint vaoHandle;
 };
 
-GLenum VBAccess[] = {
+struct Shader {
+    GLuint programHandle;
+    GLuint fragmentHandle;
+    GLuint vertexHandle;
+    GLuint geometryHandle;
+};
+
+const GLenum VBAccess[] = {
     GL_STATIC_DRAW,
     GL_DYNAMIC_DRAW,
     GL_STREAM_DRAW,
 };
 
-GLenum GLVertexDataTypes[] = {
+const GLenum GLVertexDataTypes[] = {
     GL_BYTE,
     GL_UNSIGNED_BYTE,
     GL_SHORT,
@@ -31,6 +38,16 @@ GLenum GLVertexDataTypes[] = {
     GL_DOUBLE,
 };
 
+const GLenum GLDrawPrimitives[] = {
+    GL_TRIANGLES,
+    GL_TRIANGLE_FAN,
+    GL_TRIANGLE_STRIP,
+    GL_QUADS,
+    GL_LINES,
+    GL_LINE_STRIP,
+    GL_LINE_LOOP,
+    GL_POINTS,
+};
 
 GLsizei getDataSize(GLenum type){
     switch (type){
@@ -54,7 +71,7 @@ GLBackend::GLBackend()
 
 GLBackend::~GLBackend()
 {
-    for (auto vb : vertexBuffers.getMap()) {
+    for (auto vb : _vertexBuffers.getMap()) {
         glDeleteBuffers(1, &vb.second.vboHandle);
     }
 }
@@ -74,14 +91,14 @@ VertexBufferID GLBackend::addVertexBuffer(const long size,
                  data,
                  VBAccess[bufferAccess]);
 
-    VertexBufferID newID = vertexBuffers.add(vb);
+    VertexBufferID newID = _vertexBuffers.add(vb);
     return newID;
 }
 
 void GLBackend::setVertexBuffer(const VertexBufferID vb)
 {
     glBindBuffer(GL_ARRAY_BUFFER,
-                 vertexBuffers.getMap().at(vb).vboHandle);
+                 _vertexBuffers.getMap().at(vb).vboHandle);
 }
 
 void GLBackend::uploadVertexData(const long size,
@@ -123,11 +140,90 @@ VertexLayoutID GLBackend::addVertexLayout(const long numStreams,
         offset += getDataSize(GLVertexDataTypes[desc.type]);
     }
     
-    VertexLayoutID newID = vertexLayouts.add(vl);
+    VertexLayoutID newID = _vertexLayouts.add(vl);
     return newID;
 }
 
 void GLBackend::setVertexLayout(const VertexLayoutID vl)
 {
-    glBindVertexArray(vertexLayouts.getMap().at(vl).vaoHandle);
+    glBindVertexArray(_vertexLayouts.getMap().at(vl).vaoHandle);
+}
+
+ShaderID GLBackend::addShader(const char* fragSource,
+                              const char* vertSource,
+                              const char* geomSource)
+{
+    Shader s;
+    
+    s.fragmentHandle = glCreateShader (GL_FRAGMENT_SHADER);
+    glShaderSource (s.fragmentHandle, 1, &fragSource, NULL);
+    glCompileShader (s.fragmentHandle);
+    
+    s.vertexHandle = glCreateShader (GL_VERTEX_SHADER);
+    glShaderSource (s.vertexHandle, 1, &vertSource, NULL);
+    glCompileShader (s.vertexHandle);
+
+    if (geomSource != NULL) {
+        s.geometryHandle = glCreateShader (GL_GEOMETRY_SHADER);
+        glShaderSource (s.geometryHandle, 1, &geomSource, NULL);
+        glCompileShader (s.geometryHandle);
+    }
+    
+    s.programHandle = glCreateProgram();
+    glAttachShader(s.programHandle, s.fragmentHandle);
+    glAttachShader(s.programHandle, s.vertexHandle);
+    
+    if (geomSource != NULL) {
+        glAttachShader(s.programHandle, s.geometryHandle);
+    }
+    glLinkProgram(s.programHandle);
+    
+    ShaderID newID = _shaders.add(s);
+    return newID;
+}
+
+void GLBackend::setShader(const ShaderID shaderID)
+{
+    glUseProgram (_shaders.getMap().at(shaderID).programHandle);
+}
+
+
+
+void GLBackend::clear(const bool clearColor,
+                      const bool clearDepth,
+                      const bool clearStencil,
+                      const float *color,
+                      const float depth,
+                      const uint8_t stencil)
+{
+    GLbitfield clearBits = 0;
+    
+    if (clearColor) {
+        clearBits |= GL_COLOR_BUFFER_BIT;
+        glClearColor(color[0], color[1], color[2], color[3]);
+        
+    }
+    if (clearDepth) {
+        clearBits |= GL_DEPTH_BUFFER_BIT;
+        glClearDepth(depth);
+    }
+    if (clearStencil) {
+        clearBits |= GL_STENCIL_BUFFER_BIT;
+        glClearStencil(stencil);
+    }
+    
+    if (clearBits) {
+        glClear(clearBits);
+    }
+}
+
+void GLBackend::drawArrays(const DrawPrimitives primitives,
+                           const int firstVertex,
+                           const int vertexCount)
+{
+    glDrawArrays(GLDrawPrimitives[primitives],
+                 firstVertex,
+                 vertexCount);
+    
+    _drawCallCount++;
 }

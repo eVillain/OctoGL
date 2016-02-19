@@ -1,4 +1,4 @@
-#include "RenderBackend.h"
+#include "RendererBackend.h"
 
 RendererBackend::RendererBackend()
 {
@@ -8,4 +8,9 @@ RendererBackend::RendererBackend()
 RendererBackend::~RendererBackend()
 {
     // Base cleanup here
+}
+
+void RendererBackend::resetDrawCallCounter()
+{
+    _drawCallCount = 0;
 }
