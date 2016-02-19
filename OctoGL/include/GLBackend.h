@@ -31,6 +31,8 @@ public:
                                const char* geomSource = NULL);
     virtual void setShader(const ShaderID shaderID);
 
+    virtual void setShaderConstantMat4(const char* name,
+                                       const float* data);
     
     // -- Render functionality -- //
     virtual void clear(const bool clearColor,
@@ -48,5 +50,7 @@ private:
     IndexedMap<VertexBufferID, VertexBuffer> _vertexBuffers;
     IndexedMap<VertexLayoutID, VertexLayout> _vertexLayouts;
     IndexedMap<ShaderID, Shader> _shaders;
+    
+    ShaderID _currentShader;
 };
 #endif /* GLBackend_hpp */

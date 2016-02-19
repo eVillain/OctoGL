@@ -1,5 +1,6 @@
 #include "GLBackend.h"
 #include <GL/glew.h>
+#include <cstdlib>
 
 // This is only for AppleGL, in the real world we need to wrap this with some
 // preprocessor directives to support other platforms
@@ -125,7 +126,6 @@ VertexLayoutID GLBackend::addVertexLayout(const long numStreams,
         VertexFormatDesc desc = formats[stream];
         stride += desc.size * getDataSize(GLVertexDataTypes[desc.type]);
     }
-
     for (GLuint stream=0; stream < numStreams; stream++) {
         glEnableVertexAttribArray(stream);
         setVertexBuffer(vbIDs[stream]);
@@ -137,6 +137,7 @@ VertexLayoutID GLBackend::addVertexLayout(const long numStreams,
                               GL_FALSE,
                               stride,
                               (GLvoid*)offset);
+        
         offset += getDataSize(GLVertexDataTypes[desc.type]);
     }
     
@@ -178,16 +179,37 @@ ShaderID GLBackend::addShader(const char* fragSource,
     }
     glLinkProgram(s.programHandle);
     
+    // Check for errors
+    GLint result;
+    glGetProgramiv(s.programHandle, GL_LINK_STATUS, &result);
+    if(result == GL_FALSE) {
+        GLint length;
+        char *log;
+        glGetProgramiv(s.programHandle, GL_INFO_LOG_LENGTH, &length);
+        log = (char*)malloc(length);
+        glGetProgramInfoLog(s.programHandle, length, &result, log);
+        fprintf(stderr, "Shader program linking failed: %s\n", log);
+        free(log);
+        s.programHandle = 0;
+    }
+    
     ShaderID newID = _shaders.add(s);
     return newID;
 }
 
 void GLBackend::setShader(const ShaderID shaderID)
 {
-    glUseProgram (_shaders.getMap().at(shaderID).programHandle);
+    glUseProgram(_shaders.getMap().at(shaderID).programHandle);
+    _currentShader = shaderID;
 }
 
-
+void GLBackend::setShaderConstantMat4(const char *name,
+                                      const float *data)
+{
+    GLuint constantID = glGetUniformLocation(_shaders.getMap().at(_currentShader).programHandle,
+                                           name);
+    glUniformMatrix4fv(constantID, 1, GL_FALSE, data);
+}
 
 void GLBackend::clear(const bool clearColor,
                       const bool clearDepth,
