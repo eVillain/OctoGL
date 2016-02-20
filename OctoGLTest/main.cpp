@@ -54,7 +54,7 @@ const float Cube_3D[] = {
 };
 
 // Vertex layout descriptor, 2 streams (0 and 1) with 4 floats each
-const VertexFormatDesc desc[] = {
+VertexFormatDesc desc[] = {
     0, FLOAT, 4,
     1, FLOAT, 4
 };
@@ -94,9 +94,10 @@ int main(int argc, const char * argv[])
                                                   STATIC,
                                                   Cube_3D);
     
+    VertexBufferID vbids[2] = { vbID, vbID };
     VertexLayoutID vlID = backend.addVertexLayout(2,
                                                   desc,
-                                                  &vbID);
+                                                  vbids);
     
     ShaderID shaderID = backend.addShader(fragment_shader_color,
                                           vertex_shader_normalvis);
