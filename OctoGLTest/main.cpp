@@ -3,88 +3,61 @@
 
 #include "DefaultShaders.h"
 #include <SDL2/SDL.h>
-#include <GL/glew.h>
 #include <string>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
-VertexBufferID vbID = 0;
-VertexLayoutID vlID = 0;
-ShaderID shaderID = 0;
-GLBackend backend;
+// Cube verts, position xyzw and normal xyzw
+const float Cube_3D[] = {
+    // front
+    -0.5, -0.5,  0.5,  1.0,    0.0, 0.0, 1.0, 1.0,
+    0.5, -0.5,  0.5,  1.0,    0.0, 0.0, 1.0, 1.0,
+    0.5,  0.5,  0.5,  1.0,    0.0, 0.0, 1.0, 1.0,
+    0.5,  0.5,  0.5,  1.0,    0.0, 0.0, 1.0, 1.0,
+    -0.5,  0.5,  0.5,  1.0,    0.0, 0.0, 1.0, 1.0,
+    -0.5, -0.5,  0.5,  1.0,    0.0, 0.0, 1.0, 1.0,
+    // right
+    0.5, -0.5,  0.5,  1.0,    1.0, 0.0, 0.0, 1.0,
+    0.5, -0.5, -0.5,  1.0,    1.0, 0.0, 0.0, 1.0,
+    0.5,  0.5, -0.5,  1.0,    1.0, 0.0, 0.0, 1.0,
+    0.5,  0.5, -0.5,  1.0,    1.0, 0.0, 0.0, 1.0,
+    0.5,  0.5,  0.5,  1.0,    1.0, 0.0, 0.0, 1.0,
+    0.5, -0.5,  0.5,  1.0,    1.0, 0.0, 0.0, 1.0,
+    // back
+    -0.5,  0.5, -0.5,  1.0,    0.0, 0.0, -1.0, 1.0,
+    0.5,  0.5, -0.5,  1.0,    0.0, 0.0, -1.0, 1.0,
+    0.5, -0.5, -0.5,  1.0,    0.0, 0.0, -1.0, 1.0,
+    0.5, -0.5, -0.5,  1.0,    0.0, 0.0, -1.0, 1.0,
+    -0.5, -0.5, -0.5,  1.0,    0.0, 0.0, -1.0, 1.0,
+    -0.5,  0.5, -0.5,  1.0,    0.0, 0.0, -1.0, 1.0,
+    // left
+    -0.5, -0.5, -0.5,  1.0,    -1.0, 0.0, 0.0, 1.0,
+    -0.5, -0.5,  0.5,  1.0,    -1.0, 0.0, 0.0, 1.0,
+    -0.5,  0.5,  0.5,  1.0,    -1.0, 0.0, 0.0, 1.0,
+    -0.5,  0.5,  0.5,  1.0,    -1.0, 0.0, 0.0, 1.0,
+    -0.5,  0.5, -0.5,  1.0,    -1.0, 0.0, 0.0, 1.0,
+    -0.5, -0.5, -0.5,  1.0,    -1.0, 0.0, 0.0, 1.0,
+    // bottom
+    -0.5, -0.5, -0.5,  1.0,    0.0, -1.0, 0.0, 1.0,
+    0.5, -0.5, -0.5,  1.0,    0.0, -1.0, 0.0, 1.0,
+    0.5, -0.5,  0.5,  1.0,    0.0, -1.0, 0.0, 1.0,
+    0.5, -0.5,  0.5,  1.0,    0.0, -1.0, 0.0, 1.0,
+    -0.5, -0.5,  0.5,  1.0,    0.0, -1.0, 0.0, 1.0,
+    -0.5, -0.5, -0.5,  1.0,    0.0, -1.0, 0.0, 1.0,
+    // top
+    -0.5,  0.5,  0.5,  1.0,    0.0, 1.0, 0.0, 1.0,
+    0.5,  0.5,  0.5,  1.0,    0.0, 1.0, 0.0, 1.0,
+    0.5,  0.5, -0.5,  1.0,    0.0, 1.0, 0.0, 1.0,
+    0.5,  0.5, -0.5,  1.0,    0.0, 1.0, 0.0, 1.0,
+    -0.5,  0.5, -0.5,  1.0,    0.0, 1.0, 0.0, 1.0,
+    -0.5,  0.5,  0.5,  1.0,    0.0, 1.0, 0.0, 1.0,
+};
 
-bool InitVertexBufferObject()
-{
-    // Cube verts, position xyzw and normal xyzw
-    const float Cube_3D[] = {
-        // front
-        -0.5, -0.5,  0.5,  1.0,    0.0, 0.0, 1.0, 1.0,
-         0.5, -0.5,  0.5,  1.0,    0.0, 0.0, 1.0, 1.0,
-         0.5,  0.5,  0.5,  1.0,    0.0, 0.0, 1.0, 1.0,
-         0.5,  0.5,  0.5,  1.0,    0.0, 0.0, 1.0, 1.0,
-        -0.5,  0.5,  0.5,  1.0,    0.0, 0.0, 1.0, 1.0,
-        -0.5, -0.5,  0.5,  1.0,    0.0, 0.0, 1.0, 1.0,
-        // right
-         0.5, -0.5,  0.5,  1.0,    1.0, 0.0, 0.0, 1.0,
-         0.5, -0.5, -0.5,  1.0,    1.0, 0.0, 0.0, 1.0,
-         0.5,  0.5, -0.5,  1.0,    1.0, 0.0, 0.0, 1.0,
-         0.5,  0.5, -0.5,  1.0,    1.0, 0.0, 0.0, 1.0,
-         0.5,  0.5,  0.5,  1.0,    1.0, 0.0, 0.0, 1.0,
-         0.5, -0.5,  0.5,  1.0,    1.0, 0.0, 0.0, 1.0,
-        // back
-        -0.5,  0.5, -0.5,  1.0,    0.0, 0.0, -1.0, 1.0,
-         0.5,  0.5, -0.5,  1.0,    0.0, 0.0, -1.0, 1.0,
-         0.5, -0.5, -0.5,  1.0,    0.0, 0.0, -1.0, 1.0,
-         0.5, -0.5, -0.5,  1.0,    0.0, 0.0, -1.0, 1.0,
-        -0.5, -0.5, -0.5,  1.0,    0.0, 0.0, -1.0, 1.0,
-        -0.5,  0.5, -0.5,  1.0,    0.0, 0.0, -1.0, 1.0,
-        // left
-        -0.5, -0.5, -0.5,  1.0,    -1.0, 0.0, 0.0, 1.0,
-        -0.5, -0.5,  0.5,  1.0,    -1.0, 0.0, 0.0, 1.0,
-        -0.5,  0.5,  0.5,  1.0,    -1.0, 0.0, 0.0, 1.0,
-        -0.5,  0.5,  0.5,  1.0,    -1.0, 0.0, 0.0, 1.0,
-        -0.5,  0.5, -0.5,  1.0,    -1.0, 0.0, 0.0, 1.0,
-        -0.5, -0.5, -0.5,  1.0,    -1.0, 0.0, 0.0, 1.0,
-        // bottom
-        -0.5, -0.5, -0.5,  1.0,    0.0, -1.0, 0.0, 1.0,
-         0.5, -0.5, -0.5,  1.0,    0.0, -1.0, 0.0, 1.0,
-         0.5, -0.5,  0.5,  1.0,    0.0, -1.0, 0.0, 1.0,
-         0.5, -0.5,  0.5,  1.0,    0.0, -1.0, 0.0, 1.0,
-        -0.5, -0.5,  0.5,  1.0,    0.0, -1.0, 0.0, 1.0,
-        -0.5, -0.5, -0.5,  1.0,    0.0, -1.0, 0.0, 1.0,
-        // top
-        -0.5,  0.5,  0.5,  1.0,    0.0, 1.0, 0.0, 1.0,
-         0.5,  0.5,  0.5,  1.0,    0.0, 1.0, 0.0, 1.0,
-         0.5,  0.5, -0.5,  1.0,    0.0, 1.0, 0.0, 1.0,
-         0.5,  0.5, -0.5,  1.0,    0.0, 1.0, 0.0, 1.0,
-        -0.5,  0.5, -0.5,  1.0,    0.0, 1.0, 0.0, 1.0,
-        -0.5,  0.5,  0.5,  1.0,    0.0, 1.0, 0.0, 1.0,
-    };
-    
-    vbID = backend.addVertexBuffer(sizeof(Cube_3D),
-                                   STATIC,
-                                   Cube_3D);
-    return true;
-}
-
-bool InitVertexArrayObject()
-{
-    VertexFormatDesc desc[] = {
-        0, FLOAT, 4,
-        1, FLOAT, 4
-    };
-    vlID = backend.addVertexLayout(2,
-                                   desc,
-                                   &vbID);
-    return true;
-}
-
-bool InitShader()
-{
-    shaderID = backend.addShader(fragment_shader_color,
-                                 vertex_shader_normalvis);
-    return true;
-}
+// Vertex layout descriptor, 2 streams (0 and 1) with 4 floats each
+const VertexFormatDesc desc[] = {
+    0, FLOAT, 4,
+    1, FLOAT, 4
+};
 
 glm::mat4 getMVP(int width, int height)
 {
@@ -115,10 +88,20 @@ int main(int argc, const char * argv[])
     AppContext appContext;
     appContext.InitApp("OctoGL v0.0.0");
     
-    if (!InitVertexBufferObject()) return 1;
-    if (!InitVertexArrayObject()) return 1;
-    if (!InitShader()) return 1;
+    GLBackend backend;
     
+    VertexBufferID vbID = backend.addVertexBuffer(sizeof(Cube_3D),
+                                                  STATIC,
+                                                  Cube_3D);
+    
+    VertexLayoutID vlID = backend.addVertexLayout(2,
+                                                  desc,
+                                                  &vbID);
+    
+    ShaderID shaderID = backend.addShader(fragment_shader_color,
+                                          vertex_shader_normalvis);
+    
+    DepthStateID depthState = backend.addDepthState(true, true, LESS);
     SDL_Event event;
     
     glm::mat4 mvp = getMVP(appContext.GetWindow()->GetWidth(),
@@ -130,17 +113,13 @@ int main(int argc, const char * argv[])
         float clearColor[4] = { 0.3, 0.3, 0.3, 0.0 };
         backend.clear(true, true, false, clearColor, 1.0, 0);
         
-        // Enable depth test
-        glEnable(GL_DEPTH_TEST);
-        // Accept fragment if it closer to the camera than the former one
-        glDepthFunc(GL_LESS);
-        
         // Set our render state
+        backend.setDepthState(depthState);
         backend.setShader(shaderID);
-        backend.setShaderConstantMat4("MVP", glm::value_ptr(mvp));
+        backend.setShaderConstant4x4f("MVP", glm::value_ptr(mvp));
         backend.setVertexLayout(vlID);
         
-        // Draw points 0-3 from the currently bound vertices with current shader
+        // Draw points 0-36 from the currently bound vertices with current shader
         backend.drawArrays(DRAW_TRIANGLES, 0, 36);
         
         // Update events like input handling

@@ -22,6 +22,12 @@ struct Shader {
     GLuint geometryHandle;
 };
 
+struct DepthState {
+    GLenum depthFunc;
+    bool depthTest;
+    bool depthWrite;
+};
+
 const GLenum VBAccess[] = {
     GL_STATIC_DRAW,
     GL_DYNAMIC_DRAW,
@@ -50,6 +56,17 @@ const GLenum GLDrawPrimitives[] = {
     GL_POINTS,
 };
 
+const GLenum GLDepthTests[] = {
+    GL_NEVER,
+    GL_LESS,
+    GL_EQUAL,
+    GL_LEQUAL,
+    GL_GREATER,
+    GL_NOTEQUAL,
+    GL_GEQUAL,
+    GL_ALWAYS,
+};
+
 GLsizei getDataSize(GLenum type){
     switch (type){
         case GL_BYTE:           return sizeof(GLfloat);
@@ -61,11 +78,15 @@ GLsizei getDataSize(GLenum type){
         case GL_FLOAT:          return sizeof(GLfloat);
         case GL_DOUBLE:         return sizeof(GLdouble);
     }
-    printf("ERROR GETTING DATA SIZE - UNKNOWN ENUM TYPE!\n");
+    printf("[GLBackend] ERROR GETTING DATA SIZE - UNKNOWN ENUM TYPE!\n");
     return 0;
 }
 
-GLBackend::GLBackend()
+GLBackend::GLBackend() :
+_currentVertexBuffer(255),
+_currentVertexLayout(255),
+_currentShader(255),
+_currentDepthState(255)
 {
     
 }
@@ -93,13 +114,17 @@ VertexBufferID GLBackend::addVertexBuffer(const long size,
                  VBAccess[bufferAccess]);
 
     VertexBufferID newID = _vertexBuffers.add(vb);
+    _currentVertexBuffer = newID;
     return newID;
 }
 
 void GLBackend::setVertexBuffer(const VertexBufferID vb)
 {
-    glBindBuffer(GL_ARRAY_BUFFER,
-                 _vertexBuffers.getMap().at(vb).vboHandle);
+    if (vb != _currentVertexBuffer) {
+        glBindBuffer(GL_ARRAY_BUFFER,
+                     _vertexBuffers.getMap().at(vb).vboHandle);
+        _currentVertexBuffer = vb;
+    }
 }
 
 void GLBackend::uploadVertexData(const long size,
@@ -142,12 +167,16 @@ VertexLayoutID GLBackend::addVertexLayout(const long numStreams,
     }
     
     VertexLayoutID newID = _vertexLayouts.add(vl);
+    _currentVertexLayout = newID;
     return newID;
 }
 
 void GLBackend::setVertexLayout(const VertexLayoutID vl)
 {
-    glBindVertexArray(_vertexLayouts.getMap().at(vl).vaoHandle);
+    if (vl != _currentVertexLayout) {
+        glBindVertexArray(_vertexLayouts.getMap().at(vl).vaoHandle);
+        _currentVertexLayout = vl;
+    }
 }
 
 ShaderID GLBackend::addShader(const char* fragSource,
@@ -197,18 +226,140 @@ ShaderID GLBackend::addShader(const char* fragSource,
     return newID;
 }
 
-void GLBackend::setShader(const ShaderID shaderID)
+void GLBackend::setShader(const ShaderID s)
 {
-    glUseProgram(_shaders.getMap().at(shaderID).programHandle);
-    _currentShader = shaderID;
+    if (s != _currentShader) {
+        glUseProgram(_shaders.getMap().at(s).programHandle);
+        _currentShader = s;
+    }
 }
 
-void GLBackend::setShaderConstantMat4(const char *name,
-                                      const float *data)
+void GLBackend::setShaderConstant1i(const char *name,
+                                    const int constant)
 {
     GLuint constantID = glGetUniformLocation(_shaders.getMap().at(_currentShader).programHandle,
-                                           name);
-    glUniformMatrix4fv(constantID, 1, GL_FALSE, data);
+                                             name);
+    glUniform1i(constantID, constant);
+}
+
+void GLBackend::setShaderConstant1f(const char *name,
+                                    const float constant)
+{
+    GLuint constantID = glGetUniformLocation(_shaders.getMap().at(_currentShader).programHandle,
+                                             name);
+    glUniform1f(constantID, constant);
+}
+
+
+void GLBackend::setShaderConstant2f(const char *name,
+                                    const float* constant)
+{
+    GLuint constantID = glGetUniformLocation(_shaders.getMap().at(_currentShader).programHandle,
+                                             name);
+    glUniform2fv(constantID, 1, constant);
+}
+
+
+void GLBackend::setShaderConstant3f(const char *name,
+                                    const float* constant)
+{
+    GLuint constantID = glGetUniformLocation(_shaders.getMap().at(_currentShader).programHandle,
+                                             name);
+    glUniform3fv(constantID, 1, constant);
+}
+
+
+void GLBackend::setShaderConstant4f(const char *name,
+                                    const float* constant)
+{
+    GLuint constantID = glGetUniformLocation(_shaders.getMap().at(_currentShader).programHandle,
+                                             name);
+    glUniform4fv(constantID, 1, constant);
+}
+
+
+void GLBackend::setShaderConstant4x4f(const char *name,
+                                      const float* constant)
+{
+    GLuint constantID = glGetUniformLocation(_shaders.getMap().at(_currentShader).programHandle,
+                                             name);
+    glUniformMatrix4fv(constantID, 1, GL_FALSE, constant);
+}
+
+
+void GLBackend::setShaderConstantArray1f(const char *name,
+                                         const float *constant,
+                                         const unsigned int count)
+{
+    GLuint constantID = glGetUniformLocation(_shaders.getMap().at(_currentShader).programHandle,
+                                             name);
+    glUniform1fv(constantID, count, constant);
+
+}
+
+
+void GLBackend::setShaderConstantArray2f(const char *name,
+                                         const float* constant,
+                                         const unsigned int count)
+{
+    GLuint constantID = glGetUniformLocation(_shaders.getMap().at(_currentShader).programHandle,
+                                             name);
+    glUniform2fv(constantID, count, constant);
+}
+
+
+void GLBackend::setShaderConstantArray3f(const char *name,
+                                         const float* constant,
+                                         const unsigned int count)
+{
+    GLuint constantID = glGetUniformLocation(_shaders.getMap().at(_currentShader).programHandle,
+                                             name);
+    glUniform3fv(constantID, count, constant);
+}
+
+
+void GLBackend::setShaderConstantArray4f(const char *name,
+                                         const float* constant,
+                                         const unsigned int count)
+{
+    GLuint constantID = glGetUniformLocation(_shaders.getMap().at(_currentShader).programHandle,
+                                             name);
+    glUniform4fv(constantID, count, constant);
+}
+
+
+void GLBackend::setShaderConstantArray4x4f(const char *name,
+                                           const float* constant,
+                                           const unsigned int count)
+{
+    GLuint constantID = glGetUniformLocation(_shaders.getMap().at(_currentShader).programHandle,
+                                             name);
+    glUniformMatrix4fv(constantID, count, GL_FALSE, constant);
+}
+
+DepthStateID GLBackend::addDepthState(const bool depthTest,
+                                      const bool depthWrite,
+                                      const DepthTestType depthFunc)
+{
+    DepthState ds;
+    
+    ds.depthTest = depthTest;
+    ds.depthWrite = depthWrite;
+    ds.depthFunc = GLDepthTests[depthFunc];
+    
+    DepthStateID newID = _depthStates.add(ds);
+    return newID;
+}
+
+void GLBackend::setDepthState(const DepthStateID ds)
+{
+    DepthState state = _depthStates.getMap().at(ds);
+    if (ds != _currentDepthState)
+    {
+        state.depthTest ? glEnable(GL_DEPTH_TEST) : glDisable(GL_DEPTH_TEST);
+        state.depthWrite ? glDepthMask(GL_TRUE) : glDepthMask(GL_FALSE);
+        glDepthFunc(state.depthFunc);
+    }
 }
 
 void GLBackend::clear(const bool clearColor,

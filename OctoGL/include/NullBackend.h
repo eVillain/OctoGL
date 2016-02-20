@@ -29,7 +29,39 @@ public:
                                const char* vertSource,
                                const char* geomSource = NULL);
     virtual void setShader(const ShaderID shaderID);
-    
+    virtual void setShaderConstant1i(const char *name,
+                                     const int constant);
+    virtual void setShaderConstant1f(const char *name,
+                                     const float constant);
+    virtual void setShaderConstant2f(const char *name,
+                                     const float* constant);
+    virtual void setShaderConstant3f(const char *name,
+                                     const float* constant);
+    virtual void setShaderConstant4f(const char *name,
+                                     const float* constant);
+    virtual void setShaderConstant4x4f(const char *name,
+                                       const float* constant);
+    virtual void setShaderConstantArray1f(const char *name,
+                                          const float *constant,
+                                          const unsigned int count);
+    virtual void setShaderConstantArray2f(const char *name,
+                                          const float* constant,
+                                          const unsigned int count);
+    virtual void setShaderConstantArray3f(const char *name,
+                                          const float* constant,
+                                          const unsigned int count);
+    virtual void setShaderConstantArray4f(const char *name,
+                                          const float* constant,
+                                          const unsigned int count);
+    virtual void setShaderConstantArray4x4f(const char *name,
+                                            const float* constant,
+                                            const unsigned int count);
+    // -- Depth test -- //
+    virtual DepthStateID addDepthState(const bool depthTest,
+                                       const bool depthWrite,
+                                       const DepthTestType depthFunc);
+    virtual void setDepthState(const DepthStateID ds);
+
     // -- Render functionality -- //
     virtual void clear(const bool clearColor,
                        const bool clearDepth,
