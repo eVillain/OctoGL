@@ -96,3 +96,7 @@ DepthStateID NullBackend::addDepthState(const bool depthTest,
 {
     return 0;
 }
+
+void setDepthState(const DepthStateID ds)
+{ }
+

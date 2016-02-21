@@ -12,6 +12,12 @@
 		D94346BE1C75440200C8ACF2 /* NullBackend.h in Headers */ = {isa = PBXBuildFile; fileRef = D94346BA1C75440200C8ACF2 /* NullBackend.h */; settings = {ASSET_TAGS = (); }; };
 		D94346BF1C75440200C8ACF2 /* RendererBackend.h in Headers */ = {isa = PBXBuildFile; fileRef = D94346BB1C75440200C8ACF2 /* RendererBackend.h */; settings = {ASSET_TAGS = (); }; };
 		D94346C01C76196D00C8ACF2 /* libGLEW.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D9D5429E1C74813F00A8D1F8 /* libGLEW.a */; };
+		D954375A1C793A3F009E1778 /* BackendDispatch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D95437581C793A3F009E1778 /* BackendDispatch.cpp */; settings = {ASSET_TAGS = (); }; };
+		D954375B1C793A3F009E1778 /* Commands.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D95437591C793A3F009E1778 /* Commands.cpp */; settings = {ASSET_TAGS = (); }; };
+		D95437601C793B6D009E1778 /* BackendDispatch.h in Headers */ = {isa = PBXBuildFile; fileRef = D954375C1C793B6D009E1778 /* BackendDispatch.h */; settings = {ASSET_TAGS = (); }; };
+		D95437611C793B6D009E1778 /* CommandPacket.h in Headers */ = {isa = PBXBuildFile; fileRef = D954375D1C793B6D009E1778 /* CommandPacket.h */; settings = {ASSET_TAGS = (); }; };
+		D95437621C793B6D009E1778 /* Commands.h in Headers */ = {isa = PBXBuildFile; fileRef = D954375E1C793B6D009E1778 /* Commands.h */; settings = {ASSET_TAGS = (); }; };
+		D95437631C793B6D009E1778 /* CommandStack.h in Headers */ = {isa = PBXBuildFile; fileRef = D954375F1C793B6D009E1778 /* CommandStack.h */; settings = {ASSET_TAGS = (); }; };
 		D958F7531C74E75C00347EC0 /* AppContext.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D958F74F1C74E75C00347EC0 /* AppContext.cpp */; settings = {ASSET_TAGS = (); }; };
 		D958F7541C74E75C00347EC0 /* Window.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D958F7511C74E75C00347EC0 /* Window.cpp */; settings = {ASSET_TAGS = (); }; };
 		D958F7591C74EAA900347EC0 /* DefaultShaders.h in Headers */ = {isa = PBXBuildFile; fileRef = D958F7571C74EAA900347EC0 /* DefaultShaders.h */; settings = {ASSET_TAGS = (); }; };
@@ -31,6 +37,12 @@
 		D94346B91C75440200C8ACF2 /* IndexedMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IndexedMap.h; sourceTree = "<group>"; };
 		D94346BA1C75440200C8ACF2 /* NullBackend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NullBackend.h; sourceTree = "<group>"; };
 		D94346BB1C75440200C8ACF2 /* RendererBackend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RendererBackend.h; sourceTree = "<group>"; };
+		D95437581C793A3F009E1778 /* BackendDispatch.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BackendDispatch.cpp; sourceTree = "<group>"; };
+		D95437591C793A3F009E1778 /* Commands.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Commands.cpp; sourceTree = "<group>"; };
+		D954375C1C793B6D009E1778 /* BackendDispatch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BackendDispatch.h; sourceTree = "<group>"; };
+		D954375D1C793B6D009E1778 /* CommandPacket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommandPacket.h; sourceTree = "<group>"; };
+		D954375E1C793B6D009E1778 /* Commands.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Commands.h; sourceTree = "<group>"; };
+		D954375F1C793B6D009E1778 /* CommandStack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommandStack.h; sourceTree = "<group>"; };
 		D958F74F1C74E75C00347EC0 /* AppContext.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AppContext.cpp; sourceTree = "<group>"; };
 		D958F7501C74E75C00347EC0 /* AppContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppContext.h; sourceTree = "<group>"; };
 		D958F7511C74E75C00347EC0 /* Window.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Window.cpp; sourceTree = "<group>"; };
@@ -422,6 +434,10 @@
 		D958F7561C74EAA900347EC0 /* include */ = {
 			isa = PBXGroup;
 			children = (
+				D954375C1C793B6D009E1778 /* BackendDispatch.h */,
+				D954375D1C793B6D009E1778 /* CommandPacket.h */,
+				D954375E1C793B6D009E1778 /* Commands.h */,
+				D954375F1C793B6D009E1778 /* CommandStack.h */,
 				D958F7571C74EAA900347EC0 /* DefaultShaders.h */,
 				D94346B81C75440200C8ACF2 /* GLBackend.h */,
 				D94346B91C75440200C8ACF2 /* IndexedMap.h */,
@@ -434,6 +450,8 @@
 		D958F7581C74EAA900347EC0 /* src */ = {
 			isa = PBXGroup;
 			children = (
+				D95437581C793A3F009E1778 /* BackendDispatch.cpp */,
+				D95437591C793A3F009E1778 /* Commands.cpp */,
 				D958F7621C75116700347EC0 /* GLBackend.cpp */,
 				D958F75E1C75115500347EC0 /* NullBackend.cpp */,
 				D958F75A1C750FF900347EC0 /* RendererBackend.cpp */,
@@ -885,7 +903,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				D94346BC1C75440200C8ACF2 /* GLBackend.h in Headers */,
+				D95437611C793B6D009E1778 /* CommandPacket.h in Headers */,
+				D95437621C793B6D009E1778 /* Commands.h in Headers */,
+				D95437601C793B6D009E1778 /* BackendDispatch.h in Headers */,
 				D958F7591C74EAA900347EC0 /* DefaultShaders.h in Headers */,
+				D95437631C793B6D009E1778 /* CommandStack.h in Headers */,
 				D94346BE1C75440200C8ACF2 /* NullBackend.h in Headers */,
 				D94346BD1C75440200C8ACF2 /* IndexedMap.h in Headers */,
 				D94346BF1C75440200C8ACF2 /* RendererBackend.h in Headers */,
@@ -980,8 +1002,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D954375A1C793A3F009E1778 /* BackendDispatch.cpp in Sources */,
 				D958F7641C75116700347EC0 /* GLBackend.cpp in Sources */,
 				D958F75C1C750FF900347EC0 /* RendererBackend.cpp in Sources */,
+				D954375B1C793A3F009E1778 /* Commands.cpp in Sources */,
 				D958F7601C75115500347EC0 /* NullBackend.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
