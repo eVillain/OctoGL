@@ -26,6 +26,10 @@
 		D958F7641C75116700347EC0 /* GLBackend.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D958F7621C75116700347EC0 /* GLBackend.cpp */; settings = {ASSET_TAGS = (); }; };
 		D958F7661C75159100347EC0 /* libOctoGL.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D9D541281C74807600A8D1F8 /* libOctoGL.a */; };
 		D958F7671C7515B300347EC0 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9D542A41C74837300A8D1F8 /* OpenGL.framework */; };
+		D9B68B481C7A970D0098216C /* Camera.h in Headers */ = {isa = PBXBuildFile; fileRef = D9B68B461C7A970D0098216C /* Camera.h */; settings = {ASSET_TAGS = (); }; };
+		D9B68B491C7A970D0098216C /* Renderer.h in Headers */ = {isa = PBXBuildFile; fileRef = D9B68B471C7A970D0098216C /* Renderer.h */; settings = {ASSET_TAGS = (); }; };
+		D9B68B4C1C7A97180098216C /* Camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9B68B4A1C7A97180098216C /* Camera.cpp */; settings = {ASSET_TAGS = (); }; };
+		D9B68B4D1C7A97180098216C /* Renderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9B68B4B1C7A97180098216C /* Renderer.cpp */; settings = {ASSET_TAGS = (); }; };
 		D9D541451C7480F400A8D1F8 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9D541441C7480F400A8D1F8 /* main.cpp */; settings = {ASSET_TAGS = (); }; };
 		D9D542A21C74836500A8D1F8 /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9D5429F1C74813F00A8D1F8 /* SDL2.framework */; };
 		D9D542A31C74836900A8D1F8 /* libGLEW.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D9D5429E1C74813F00A8D1F8 /* libGLEW.a */; };
@@ -51,6 +55,10 @@
 		D958F75A1C750FF900347EC0 /* RendererBackend.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RendererBackend.cpp; sourceTree = "<group>"; };
 		D958F75E1C75115500347EC0 /* NullBackend.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = NullBackend.cpp; sourceTree = "<group>"; };
 		D958F7621C75116700347EC0 /* GLBackend.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GLBackend.cpp; sourceTree = "<group>"; };
+		D9B68B461C7A970D0098216C /* Camera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Camera.h; sourceTree = "<group>"; };
+		D9B68B471C7A970D0098216C /* Renderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Renderer.h; sourceTree = "<group>"; };
+		D9B68B4A1C7A97180098216C /* Camera.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Camera.cpp; sourceTree = "<group>"; };
+		D9B68B4B1C7A97180098216C /* Renderer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Renderer.cpp; sourceTree = "<group>"; };
 		D9D541281C74807600A8D1F8 /* libOctoGL.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libOctoGL.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9D541331C7480B300A8D1F8 /* OctoGLTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OctoGLTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9D541401C7480B300A8D1F8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -435,6 +443,7 @@
 			isa = PBXGroup;
 			children = (
 				D954375C1C793B6D009E1778 /* BackendDispatch.h */,
+				D9B68B461C7A970D0098216C /* Camera.h */,
 				D954375D1C793B6D009E1778 /* CommandPacket.h */,
 				D954375E1C793B6D009E1778 /* Commands.h */,
 				D954375F1C793B6D009E1778 /* CommandStack.h */,
@@ -442,6 +451,7 @@
 				D94346B81C75440200C8ACF2 /* GLBackend.h */,
 				D94346B91C75440200C8ACF2 /* IndexedMap.h */,
 				D94346BA1C75440200C8ACF2 /* NullBackend.h */,
+				D9B68B471C7A970D0098216C /* Renderer.h */,
 				D94346BB1C75440200C8ACF2 /* RendererBackend.h */,
 			);
 			path = include;
@@ -451,9 +461,11 @@
 			isa = PBXGroup;
 			children = (
 				D95437581C793A3F009E1778 /* BackendDispatch.cpp */,
+				D9B68B4A1C7A97180098216C /* Camera.cpp */,
 				D95437591C793A3F009E1778 /* Commands.cpp */,
 				D958F7621C75116700347EC0 /* GLBackend.cpp */,
 				D958F75E1C75115500347EC0 /* NullBackend.cpp */,
+				D9B68B4B1C7A97180098216C /* Renderer.cpp */,
 				D958F75A1C750FF900347EC0 /* RendererBackend.cpp */,
 			);
 			path = src;
@@ -902,7 +914,9 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D9B68B491C7A970D0098216C /* Renderer.h in Headers */,
 				D94346BC1C75440200C8ACF2 /* GLBackend.h in Headers */,
+				D9B68B481C7A970D0098216C /* Camera.h in Headers */,
 				D95437611C793B6D009E1778 /* CommandPacket.h in Headers */,
 				D95437621C793B6D009E1778 /* Commands.h in Headers */,
 				D95437601C793B6D009E1778 /* BackendDispatch.h in Headers */,
@@ -1006,6 +1020,8 @@
 				D958F7641C75116700347EC0 /* GLBackend.cpp in Sources */,
 				D958F75C1C750FF900347EC0 /* RendererBackend.cpp in Sources */,
 				D954375B1C793A3F009E1778 /* Commands.cpp in Sources */,
+				D9B68B4D1C7A97180098216C /* Renderer.cpp in Sources */,
+				D9B68B4C1C7A97180098216C /* Camera.cpp in Sources */,
 				D958F7601C75115500347EC0 /* NullBackend.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1027,7 +1043,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
@@ -1069,7 +1085,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;

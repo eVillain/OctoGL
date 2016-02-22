@@ -18,6 +18,8 @@ namespace commandPacket
         return OFFSET_COMMAND + sizeof(T) + auxMemorySize;
     };
     
+    // This leaks, for now, will need proper memory management of the command packet data
+    // therefore this method will not call "new" on the object but use a custom allocator
     template <typename T>
     static CommandPacket Create(size_t auxMemorySize)
     {

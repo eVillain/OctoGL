@@ -97,6 +97,18 @@ DepthStateID NullBackend::addDepthState(const bool depthTest,
     return 0;
 }
 
-void setDepthState(const DepthStateID ds)
+void NullBackend::setDepthState(const DepthStateID ds)
 { }
 
+void NullBackend::clear(const bool clearColor,
+                      const bool clearDepth,
+                      const bool clearStencil,
+                      const float *color,
+                      const float depth,
+                      const uint8_t stencil)
+{ }
+
+void NullBackend::drawArrays(const DrawPrimitives primitives,
+                           const int firstVertex,
+                           const int vertexCount)
+{ }
